@@ -3,6 +3,11 @@ import org.junit.Test;
 
 public class FactorialCalculatorTest {
 
+//    Usando a definição de fatorial, pensei em três casos de testes: quando o número for maior do que zero, igual a zero ou menor que zero.
+//    Esses casos foram testados abaixo. Como o propósito do exercício é escrever testes, não me preocupei em usar bigint/double ou testar um limite
+//    superior (como fatorial cresce muito rápido, a capacidade do int acaba muito rápido também), porque se a gente quisesse mesmo calcular um fatorial
+//    de um número grande, usaríamos outras libs que já pensaram nisso.
+
     @Test
     public void RecursionMethod_WithNumberToCalculateBiggerThanZero_ReturnsNumberToCalculateFactorial() throws Exception {
         // Arrange
