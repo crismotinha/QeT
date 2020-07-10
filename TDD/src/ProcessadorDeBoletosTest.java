@@ -7,7 +7,7 @@ import java.util.UUID;
 public class ProcessadorDeBoletosTest {
 
     @Test
-    public void PagarFatura_QuandoOValorDosBoletosForMaiorQueOValorTotal_DeveMarcarComoPaga(){
+    public void PagarFatura_QuandoOValorDosBoletosForMaiorQueOValorTotal_DeveMarcarComoPaga() throws Exception {
         //Arrange
         double valorFatura = 100;
         double valorBoleto = 60;
@@ -15,7 +15,7 @@ public class ProcessadorDeBoletosTest {
         Boleto boleto1 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
         Boleto boleto2 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
 
-        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2},false);
+        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false);
 
         boolean esperado = true;
 
@@ -29,7 +29,7 @@ public class ProcessadorDeBoletosTest {
     }
 
     @Test
-    public void PagarFatura_QuandoOValorDosBoletosForIgualQueOValorTotal_DeveMarcarComoPaga(){
+    public void PagarFatura_QuandoOValorDosBoletosForIgualQueOValorTotal_DeveMarcarComoPaga() throws Exception {
         //Arrange
         double valorFatura = 100;
         double valorBoleto = 50;
@@ -37,7 +37,7 @@ public class ProcessadorDeBoletosTest {
         Boleto boleto1 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
         Boleto boleto2 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
 
-        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2},false);
+        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false);
 
         boolean esperado = true;
 
@@ -51,7 +51,7 @@ public class ProcessadorDeBoletosTest {
     }
 
     @Test
-    public void PagarFatura_QuandoOValorDosBoletosForMenorQueOValorTotal_DeveMarcarComoNaoPaga(){
+    public void PagarFatura_QuandoOValorDosBoletosForMenorQueOValorTotal_DeveMarcarComoNaoPaga() throws Exception {
         //Arrange
         double valorFatura = 100;
         double valorBoleto = 20;
@@ -59,7 +59,7 @@ public class ProcessadorDeBoletosTest {
         Boleto boleto1 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
         Boleto boleto2 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
 
-        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2},false);
+        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false);
 
         boolean esperado = false;
 
@@ -73,9 +73,9 @@ public class ProcessadorDeBoletosTest {
     }
 
     @Test(expected = Exception.class)
-    public void PagarFatura_QuandoNaoExistiremBoletos_DeveRetornarErroDeBoletosInexistentes(){
+    public void PagarFatura_QuandoNaoExistiremBoletos_DeveRetornarErroDeBoletosInexistentes() throws Exception {
         //Arrange
-        Fatura fatura = new Fatura(new Date(), 10, "Teste", new Boleto[]{},false);
+        Fatura fatura = new Fatura(new Date(), 10, "Teste", new Boleto[]{}, false);
 
         //Act e Assert
         ProcessadorDeBoletos processadorDeBoletos = new ProcessadorDeBoletos();
