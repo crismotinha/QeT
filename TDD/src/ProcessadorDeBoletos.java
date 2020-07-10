@@ -10,13 +10,11 @@ public class ProcessadorDeBoletos {
 
         for (Boleto boleto : boletos) {
             somaBoletos += boleto.getValorPago();
+            Pagamento pagamento = new Pagamento(boleto.getValorPago(), new Date(), "BOLETO");
+            fatura.adicionaPagamento(pagamento);
         }
 
         if (somaBoletos >= fatura.getValorTotal()) {
-            for (Boleto boleto : boletos) {
-                Pagamento pagamento = new Pagamento(boleto.getValorPago(), new Date(), "BOLETO");
-                fatura.adicionaPagamento(pagamento);
-            }
             fatura.setPaga(true);
         }
     };
