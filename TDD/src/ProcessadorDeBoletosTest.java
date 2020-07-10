@@ -72,4 +72,15 @@ public class ProcessadorDeBoletosTest {
 
     }
 
+    @Test(expected = Exception.class)
+    public void PagarFatura_QuandoNaoExistiremBoletos_DeveRetornarErroDeBoletosInexistentes(){
+        //Arrange
+        Fatura fatura = new Fatura(new Date(), 10, "Teste", new Boleto[]{},false);
+
+        //Act e Assert
+        ProcessadorDeBoletos processadorDeBoletos = new ProcessadorDeBoletos();
+        processadorDeBoletos.PagarFatura(fatura);
+
+    }
+
 }
