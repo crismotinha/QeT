@@ -9,13 +9,13 @@ public class ProcessadorDeBoletosTest {
     @Test
     public void PagarFatura_QuandoOValorDosBoletosForMaiorQueOValorTotal_DeveMarcarComoPaga() throws Exception {
         //Arrange
-        double valorFatura = 100;
-        double valorBoleto = 60;
+        double valorFatura = 1500;
 
-        Boleto boleto1 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
-        Boleto boleto2 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
+        Boleto boleto1 = new Boleto(UUID.randomUUID(), new Date(), 500);
+        Boleto boleto2 = new Boleto(UUID.randomUUID(), new Date(), 400);
+        Boleto boleto3 = new Boleto(UUID.randomUUID(), new Date(), 600);
 
-        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false, new ArrayList<Pagamento>());
+        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2, boleto3}, false, new ArrayList<Pagamento>());
 
         boolean esperado = true;
 
@@ -53,11 +53,10 @@ public class ProcessadorDeBoletosTest {
     @Test
     public void PagarFatura_QuandoOValorDosBoletosForMenorQueOValorTotal_DeveMarcarComoNaoPaga() throws Exception {
         //Arrange
-        double valorFatura = 100;
-        double valorBoleto = 20;
+        double valorFatura = 2000;
 
-        Boleto boleto1 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
-        Boleto boleto2 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
+        Boleto boleto1 = new Boleto(UUID.randomUUID(), new Date(), 500);
+        Boleto boleto2 = new Boleto(UUID.randomUUID(), new Date(), 400);
 
         Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false, new ArrayList<Pagamento>());
 
@@ -86,15 +85,15 @@ public class ProcessadorDeBoletosTest {
     @Test
     public void PagarFatura_QuandoOValorDosBoletosForMaiorQueOValorTotal_DeveGerarUmPagamentoPorBoleto() throws Exception {
         //Arrange
-        double valorFatura = 100;
-        double valorBoleto = 60;
+        double valorFatura = 1500;
 
-        Boleto boleto1 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
-        Boleto boleto2 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
+        Boleto boleto1 = new Boleto(UUID.randomUUID(), new Date(), 500);
+        Boleto boleto2 = new Boleto(UUID.randomUUID(), new Date(), 400);
+        Boleto boleto3 = new Boleto(UUID.randomUUID(), new Date(), 600);
 
-        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false, new ArrayList<Pagamento>());
+        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2, boleto3}, false, new ArrayList<Pagamento>());
 
-        int numeroDePagamentosEsperado = 2;
+        int numeroDePagamentosEsperado = 3;
 
         //Act
         ProcessadorDeBoletos processadorDeBoletos = new ProcessadorDeBoletos();
@@ -108,11 +107,10 @@ public class ProcessadorDeBoletosTest {
     @Test
     public void PagarFatura_QuandoOValorDosBoletosForMenorQueOValorTotal_DeveGerarUmPagamentoPorBoleto() throws Exception {
         //Arrange
-        double valorFatura = 100;
-        double valorBoleto = 20;
+        double valorFatura = 2000;
 
-        Boleto boleto1 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
-        Boleto boleto2 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
+        Boleto boleto1 = new Boleto(UUID.randomUUID(), new Date(), 500);
+        Boleto boleto2 = new Boleto(UUID.randomUUID(), new Date(), 400);
 
         Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false, new ArrayList<Pagamento>());
 
