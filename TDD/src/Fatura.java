@@ -15,6 +15,10 @@ public class Fatura {
         this.paga = paga;
     }
 
+    public void setPaga(boolean paga) {
+        this.paga = paga;
+    }
+
     public Date getData() {
         return data;
     }
