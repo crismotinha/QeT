@@ -15,7 +15,7 @@ public class ProcessadorDeBoletosTest {
         Boleto boleto1 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
         Boleto boleto2 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
 
-        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false);
+        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false, new Pagamento[]{});
 
         boolean esperado = true;
 
@@ -37,7 +37,7 @@ public class ProcessadorDeBoletosTest {
         Boleto boleto1 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
         Boleto boleto2 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
 
-        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false);
+        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false, new Pagamento[]{});
 
         boolean esperado = true;
 
@@ -59,7 +59,7 @@ public class ProcessadorDeBoletosTest {
         Boleto boleto1 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
         Boleto boleto2 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
 
-        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false);
+        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false, new Pagamento[]{});
 
         boolean esperado = false;
 
@@ -75,11 +75,33 @@ public class ProcessadorDeBoletosTest {
     @Test(expected = Exception.class)
     public void PagarFatura_QuandoNaoExistiremBoletos_DeveRetornarErroDeBoletosInexistentes() throws Exception {
         //Arrange
-        Fatura fatura = new Fatura(new Date(), 10, "Teste", new Boleto[]{}, false);
+        Fatura fatura = new Fatura(new Date(), 10, "Teste", new Boleto[]{}, false, new Pagamento[]{});
 
         //Act e Assert
         ProcessadorDeBoletos processadorDeBoletos = new ProcessadorDeBoletos();
         processadorDeBoletos.PagarFatura(fatura);
+
+    }
+
+    @Test
+    public void PagarFatura_QuandoOValorDosBoletosForMaiorQueOValorTotal_DeveGerarUmPagamentoPorBoleto() throws Exception {
+        //Arrange
+        double valorFatura = 100;
+        double valorBoleto = 60;
+
+        Boleto boleto1 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
+        Boleto boleto2 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
+
+        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false, new Pagamento[]{});
+
+        int numeroDePagamentosEsperado = 2;
+
+        //Act
+        ProcessadorDeBoletos processadorDeBoletos = new ProcessadorDeBoletos();
+        processadorDeBoletos.PagarFatura(fatura);
+
+        //Assert
+        Assert.assertEquals(numeroDePagamentosEsperado, fatura.getPagamentos().length);
 
     }
 
