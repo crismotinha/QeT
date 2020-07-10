@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.util.List;
 
 public class Fatura {
     private Date data;
@@ -6,9 +7,9 @@ public class Fatura {
     private String nomeDoCliente;
     private Boleto[] boletos;
     private boolean paga;
-    private Pagamento[] pagamentos;
+    private List<Pagamento> pagamentos;
 
-    public Fatura(Date data, double valorTotal, String nomeDoCliente, Boleto[] boletos, boolean paga, Pagamento[] pagamentos) {
+    public Fatura(Date data, double valorTotal, String nomeDoCliente, Boleto[] boletos, boolean paga, List<Pagamento> pagamentos) {
         this.data = data;
         this.valorTotal = valorTotal;
         this.nomeDoCliente = nomeDoCliente;
@@ -41,11 +42,11 @@ public class Fatura {
         return paga;
     }
 
-    public Pagamento[] getPagamentos() {
+    public List<Pagamento> getPagamentos() {
         return pagamentos;
     }
 
-    public void setPagamentos(Pagamento[] pagamentos) {
-        this.pagamentos = pagamentos;
+    public void adicionaPagamento(Pagamento pagamento) {
+        this.pagamentos.add(pagamento);
     }
 }

@@ -1,11 +1,12 @@
 import javax.xml.crypto.Data;
+import java.util.Date;
 
 public class Pagamento {
     private double valorPago;
-    private Data data;
+    private Date data;
     private String tipoDePagamento;
 
-    public Pagamento(double valorPago, Data data, String tipoDePagamento) {
+    public Pagamento(double valorPago, Date data, String tipoDePagamento) {
         this.valorPago = valorPago;
         this.data = data;
         this.tipoDePagamento = tipoDePagamento;
@@ -15,7 +16,7 @@ public class Pagamento {
         return valorPago;
     }
 
-    public Data getData() {
+    public Date getData() {
         return data;
     }
 

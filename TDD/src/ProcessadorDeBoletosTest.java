@@ -1,7 +1,9 @@
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public class ProcessadorDeBoletosTest {
@@ -15,7 +17,7 @@ public class ProcessadorDeBoletosTest {
         Boleto boleto1 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
         Boleto boleto2 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
 
-        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false, new Pagamento[]{});
+        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false, new ArrayList<Pagamento>());
 
         boolean esperado = true;
 
@@ -37,7 +39,7 @@ public class ProcessadorDeBoletosTest {
         Boleto boleto1 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
         Boleto boleto2 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
 
-        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false, new Pagamento[]{});
+        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false, new ArrayList<Pagamento>());
 
         boolean esperado = true;
 
@@ -59,7 +61,7 @@ public class ProcessadorDeBoletosTest {
         Boleto boleto1 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
         Boleto boleto2 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
 
-        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false, new Pagamento[]{});
+        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false, new ArrayList<Pagamento>());
 
         boolean esperado = false;
 
@@ -75,7 +77,7 @@ public class ProcessadorDeBoletosTest {
     @Test(expected = Exception.class)
     public void PagarFatura_QuandoNaoExistiremBoletos_DeveRetornarErroDeBoletosInexistentes() throws Exception {
         //Arrange
-        Fatura fatura = new Fatura(new Date(), 10, "Teste", new Boleto[]{}, false, new Pagamento[]{});
+        Fatura fatura = new Fatura(new Date(), 10, "Teste", new Boleto[]{}, false, new ArrayList<Pagamento>());
 
         //Act e Assert
         ProcessadorDeBoletos processadorDeBoletos = new ProcessadorDeBoletos();
@@ -92,7 +94,7 @@ public class ProcessadorDeBoletosTest {
         Boleto boleto1 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
         Boleto boleto2 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
 
-        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false, new Pagamento[]{});
+        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false, new ArrayList<Pagamento>());
 
         int numeroDePagamentosEsperado = 2;
 
@@ -101,7 +103,7 @@ public class ProcessadorDeBoletosTest {
         processadorDeBoletos.PagarFatura(fatura);
 
         //Assert
-        Assert.assertEquals(numeroDePagamentosEsperado, fatura.getPagamentos().length);
+        Assert.assertEquals(numeroDePagamentosEsperado, fatura.getPagamentos().size());
 
     }
 
