@@ -107,4 +107,26 @@ public class ProcessadorDeBoletosTest {
 
     }
 
+    @Test
+    public void PagarFatura_QuandoOValorDosBoletosForMenorQueOValorTotal_DeveGerarUmPagamentoPorBoleto() throws Exception {
+        //Arrange
+        double valorFatura = 100;
+        double valorBoleto = 20;
+
+        Boleto boleto1 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
+        Boleto boleto2 = new Boleto(UUID.randomUUID(), new Date(), valorBoleto);
+
+        Fatura fatura = new Fatura(new Date(), valorFatura, "Teste", new Boleto[]{boleto1, boleto2}, false, new ArrayList<Pagamento>());
+
+        int numeroDePagamentosEsperado = 2;
+
+        //Act
+        ProcessadorDeBoletos processadorDeBoletos = new ProcessadorDeBoletos();
+        processadorDeBoletos.PagarFatura(fatura);
+
+        //Assert
+        Assert.assertEquals(numeroDePagamentosEsperado, fatura.getPagamentos().size());
+
+    }
+
 }
