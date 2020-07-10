@@ -8,7 +8,7 @@ public class ProcessadorDeBoletos {
             somaBoletos += boleto.getValorPago();;
         }
 
-        if (somaBoletos > fatura.getValorTotal()) {
+        if (somaBoletos >= fatura.getValorTotal()) {
             fatura.setPaga(true);
         }
     };
